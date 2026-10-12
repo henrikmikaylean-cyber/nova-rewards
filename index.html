@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b0b12" />
+<title>Nova Rewards</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:#0b0b12;--panel:#151520;--panel2:#1d1d2b;--text:#f7f7fb;--muted:#9293a8;--purple:#9b6cff;--pink:#e66bff;--line:#2b2b3d;--green:#72f2bd}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% -5%,#38215b 0,transparent 38%),var(--bg);color:var(--text);font:15px/1.4 Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer;border:0;color:inherit}.app{max-width:520px;margin:auto;padding:18px 16px calc(100px + env(safe-area-inset-bottom))}
+.top{display:flex;align-items:center;justify-content:space-between;margin:4px 0 22px}.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:.2px;font-size:20px}.logo{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--purple),var(--pink));display:grid;place-items:center;box-shadow:0 6px 24px #9b6cff44;font-size:20px}.pill{border:1px solid #ffffff18;background:#ffffff08;border-radius:999px;padding:8px 11px;color:#d6c8ff;font-size:12px}
+.hero{border:1px solid #ffffff15;background:linear-gradient(135deg,#292044,#171725 62%,#29203b);border-radius:26px;padding:21px;position:relative;overflow:hidden;box-shadow:0 18px 55px #0003}.hero:after{content:"✦";position:absolute;right:22px;top:10px;font-size:90px;color:#c7a7ff16;transform:rotate(12deg)}.eyebrow{color:#c7b0ff;text-transform:uppercase;font-weight:800;font-size:11px;letter-spacing:1.7px}.hero h1{font-size:27px;line-height:1.08;margin:10px 0 8px;max-width:280px}.sub{color:#aaa8bf;font-size:13px}.balance{display:flex;align-items:center;gap:12px;margin-top:22px}.coin{width:45px;height:45px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#ffd978,#ff9e52);font-size:24px;box-shadow:0 5px 18px #ffb54d30}.balance strong{font-size:25px;display:block}.balance small{font-size:12px;color:#aaa8bf}.section-head{display:flex;align-items:center;justify-content:space-between;margin:25px 2px 12px}.section-head h2{font-size:17px;margin:0}.muted{color:var(--muted);font-size:12px}.daily{display:flex;align-items:center;gap:14px;padding:15px;background:linear-gradient(110deg,#26203b,#191923);border:1px solid #8f67d82e;border-radius:20px}.daily-icon{width:48px;height:48px;border-radius:16px;background:#8c62e528;display:grid;place-items:center;font-size:25px}.daily-info{flex:1}.daily-info b{display:block;font-size:14px}.daily-info span{font-size:12px;color:#aaa8bf}.primary{background:linear-gradient(100deg,var(--purple),var(--pink));border-radius:13px;padding:11px 14px;font-size:12px;font-weight:850;box-shadow:0 6px 20px #9b6cff25}.primary:disabled{opacity:.55;cursor:default;box-shadow:none}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.stat{padding:15px;border:1px solid var(--line);background:#14141e;border-radius:18px}.stat .ico{font-size:19px}.stat strong{display:block;font-size:21px;margin-top:7px}.stat span{color:var(--muted);font-size:12px}.task{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #ffffff0c}.task:last-child{border:0}.task-icon{width:43px;height:43px;border-radius:14px;background:#ffffff0b;display:grid;place-items:center;font-size:21px}.task-main{flex:1;min-width:0}.task-main b{display:block;font-size:13px}.task-main span{font-size:12px;color:var(--muted)}.reward{font-size:12px;color:#ffd779;font-weight:800;margin-right:7px;white-space:nowrap}.task-card,.ref-card,.profile-card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:4px 14px}.ref-card{padding:17px}.ref-link{background:#0d0d15;border:1px dashed #51436e;border-radius:13px;padding:12px;display:flex;align-items:center;gap:8px;margin:13px 0}.ref-link code{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#d4c4ff;font-size:12px}.copy{background:#29213b;border-radius:10px;padding:9px 11px;font-size:12px;font-weight:800}.profile-card{padding:18px;display:flex;align-items:center;gap:14px}.avatar{width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#9b6cff,#f17bff);display:grid;place-items:center;font-size:25px;font-weight:900}.profile-card h3{margin:0 0 3px;font-size:17px}.level{display:inline-block;margin-top:6px;border-radius:8px;padding:4px 8px;background:#9b6cff20;color:#cdb7ff;font-size:10px;font-weight:800}.page{display:none}.page.active{display:block}.nav{position:fixed;z-index:5;bottom:0;left:0;right:0;background:#101019ed;backdrop-filter:blur(18px);border-top:1px solid #ffffff10;padding:10px 8px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center}.nav-inner{width:min(520px,100%);display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.nav button{background:transparent;color:#77788e;padding:7px 2px;border-radius:13px;font-size:10px;font-weight:700}.nav button span{display:block;font-size:20px;margin-bottom:3px}.nav button.active{color:#d3baff;background:#9b6cff19}.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#272338;border:1px solid #ffffff20;border-radius:14px;padding:11px 15px;font-size:12px;box-shadow:0 10px 30px #0008;display:none;white-space:nowrap;z-index:9}.note{font-size:11px;color:#77788d;text-align:center;margin:18px 0 0}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="brand"><div class="logo">✦</div> NOVA<span style="color:#b994ff">.</span></div><div class="pill">✧ REWARDS CLUB</div></header>
+  <main>
+    <section id="home" class="page active">
+      <div class="hero"><div class="eyebrow">Your reward universe</div><h1>Small tasks.<br>Big rewards.</h1><div class="sub">Collect points, keep your streak, invite friends.</div>
+        <div class="balance"><div class="coin">✦</div><div><strong id="balance">1,250</strong><small>YOUR NOVA POINTS</small></div></div>
+      </div>
+      <div class="section-head"><h2>Daily reward</h2><span class="muted">Come back every day</span></div>
+      <div class="daily"><div class="daily-icon">🎁</div><div class="daily-info"><b>Daily check-in</b><span>Claim your free 100 points</span></div><button id="dailyBtn" class="primary" onclick="claimDaily()">CLAIM +100</button></div>
+      <div class="stats"><div class="stat"><div class="ico">🎯</div><strong id="completed">0/4</strong><span>Tasks completed</span></div><div class="stat"><div class="ico">🔥</div><strong id="streak">1 day</strong><span>Current streak</span></div></div>
+      <div class="section-head"><h2>Quick missions</h2><button class="muted" style="background:none" onclick="showPage('tasks')">View all →</button></div>
+      <div class="task-card" id="quickTasks"></div>
+    </section>
+    <section id="tasks" class="page">
+      <div class="section-head" style="margin-top:8px"><h2 style="font-size:24px">Missions</h2><span class="pill">4 AVAILABLE</span></div>
+      <div class="sub" style="margin-bottom:15px">Complete missions to earn more Nova points.</div>
+      <div class="task-card" id="allTasks"></div>
+    </section>
+    <section id="friends" class="page">
+      <div class="section-head" style="margin-top:8px"><h2 style="font-size:24px">Invite friends</h2></div>
+      <div class="hero" style="padding:18px"><div class="eyebrow">Better together</div><h1 style="font-size:24px">Your friends.<br>Your rewards.</h1><div class="sub">Invite friends and earn 250 points for each new member.</div><div class="balance"><div class="coin">👥</div><div><strong id="refCount">0</strong><small>FRIENDS INVITED</small></div></div></div>
+      <div class="section-head"><h2>Your invite link</h2></div>
+      <div class="ref-card"><div class="sub">Share your personal link with friends.</div><div class="ref-link"><code id="refLink">https://t.me/YourBot?start=ref_demo</code><button class="copy" onclick="copyRef()">COPY</button></div><button class="primary" style="width:100%;padding:14px" onclick="shareRef()">↗ INVITE FRIENDS</button></div>
+      <p class="note">Referral rewards should be verified on your server before real points are credited.</p>
+    </section>
+    <section id="profile" class="page">
+      <div class="section-head" style="margin-top:8px"><h2 style="font-size:24px">My profile</h2></div>
+      <div class="profile-card"><div class="avatar" id="avatar">N</div><div><h3 id="username">Nova Player</h3><div class="muted" id="userId">Telegram member</div><span class="level">✦ NOVICE EXPLORER</span></div></div>
+      <div class="stats"><div class="stat"><div class="ico">✦</div><strong id="profileBalance">1,250</strong><span>Total points</span></div><div class="stat"><div class="ico">🏆</div><strong id="profileTasks">0</strong><span>Completed missions</span></div></div>
+      <div class="section-head"><h2>Account</h2></div>
+      <div class="task-card"><div class="task"><div class="task-icon">🔐</div><div class="task-main"><b>Secure progress</b><span>Connect a backend before launch</span></div></div><div class="task"><div class="task-icon">💬</div><div class="task-main"><b>Telegram Mini App</b><span id="tgStatus">Preview mode</span></div></div></div>
+      <p class="note">Demo prototype. Points are stored locally on this device.</p>
+    </section>
+  </main>
+</div>
+<nav class="nav"><div class="nav-inner">
+  <button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span>HOME</button>
+  <button data-page="tasks" onclick="showPage('tasks')"><span>✧</span>TASKS</button>
+  <button data-page="friends" onclick="showPage('friends')"><span>♧</span>FRIENDS</button>
+  <button data-page="profile" onclick="showPage('profile')"><span>◉</span>PROFILE</button>
+</div></nav>
+<div class="toast" id="toast"></div>
+<script>
+const tg = window.Telegram?.WebApp;
+if (tg) { tg.ready(); tg.expand(); try { tg.setHeaderColor('#0b0b12'); tg.setBackgroundColor('#0b0b12'); } catch(e){} }
+const missions = [
+ {id:'channel',icon:'📣',title:'Join our community',desc:'Follow the project channel',reward:150},
+ {id:'daily',icon:'🎁',title:'Claim daily reward',desc:'Check in today',reward:100},
+ {id:'profile',icon:'🪪',title:'Visit your profile',desc:'Check your player stats',reward:50},
+ {id:'invite',icon:'👥',title:'Invite a friend',desc:'Share your referral link',reward:250}
+];
+let state={balance:1250,claimedDaily:'',done:[],streak:1,refs:0};
+try { const old=JSON.parse(localStorage.getItem('novaDemoState')||'null'); if(old) state={...state,...old}; } catch(e){}
+const today=new Date().toISOString().slice(0,10);
+function save(){try{localStorage.setItem('novaDemoState',JSON.stringify(state))}catch(e){}}
+function fmt(n){return Number(n).toLocaleString('en-US')}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.style.display='none',2300)}
+function claimDaily(){
+ if(state.claimedDaily===today){toast('Daily reward already claimed today');return}
+ state.balance+=100;state.claimedDaily=today;if(!state.done.includes('daily'))state.done.push('daily');save();render();toast('✨ +100 points added!');
+}
+function claimTask(id){
+ const m=missions.find(x=>x.id===id);if(!m)return;
+ if(id==='daily'){claimDaily();return}
+ if(state.done.includes(id)){toast('Mission already completed');return}
+ if(id==='channel'){toast('Add your real channel link and server verification first');return}
+ if(id==='invite'){copyRef();toast('Share your link to invite friends');return}
+ state.done.push(id);state.balance+=m.reward;save();render();toast('✨ +'+m.reward+' points added!');
+}
+function taskHTML(m){const done=state.done.includes(m.id);return `<div class="task"><div class="task-icon">${m.icon}</div><div class="task-main"><b>${m.title}</b><span>${m.desc}</span></div><span class="reward">+${m.reward}</span><button class="${done?'copy':'primary'}" onclick="claimTask('${m.id}')" ${done?'disabled':''}>${done?'DONE':'GO'}</button></div>`}
+function render(){
+ document.getElementById('balance').textContent=fmt(state.balance);document.getElementById('profileBalance').textContent=fmt(state.balance);
+ document.getElementById('completed').textContent=state.done.length+'/4';document.getElementById('profileTasks').textContent=state.done.length;
+ document.getElementById('streak').textContent=state.streak+' day';document.getElementById('refCount').textContent=state.refs;
+ document.getElementById('dailyBtn').disabled=state.claimedDaily===today;document.getElementById('dailyBtn').textContent=state.claimedDaily===today?'CLAIMED':'CLAIM +100';
+ document.getElementById('quickTasks').innerHTML=missions.filter(m=>m.id!=='daily').slice(0,2).map(taskHTML).join('');
+ document.getElementById('allTasks').innerHTML=missions.map(taskHTML).join('');
+ const u=tg?.initDataUnsafe?.user;
+ if(u){document.getElementById('username').textContent=[u.first_name,u.last_name].filter(Boolean).join(' ')||'Telegram Player';document.getElementById('avatar').textContent=(u.first_name||'N').charAt(0).toUpperCase();document.getElementById('userId').textContent='ID: '+u.id;document.getElementById('tgStatus').textContent='Connected to Telegram';}
+ document.getElementById('refLink').textContent='https://t.me/YourBot?start=ref_'+(u?.id||'demo');
+}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='profile'&&!state.done.includes('profile')){state.done.push('profile');state.balance+=50;save();render()}}
+async function copyRef(){const s=document.getElementById('refLink').textContent;try{await navigator.clipboard.writeText(s);toast('Invite link copied')}catch(e){toast('Long-press the link to copy it')}}
+function shareRef(){const s=document.getElementById('refLink').textContent;const url='https://t.me/share/url?url='+encodeURIComponent(s)+'&text='+encodeURIComponent('Join me on Nova Rewards!');if(tg?.openTelegramLink)tg.openTelegramLink(url);else window.open(url,'_blank')}
+render();
+</script>
+</body>
+</html>
