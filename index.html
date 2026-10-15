@@ -112,6 +112,41 @@ function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.
 async function copyRef(){const s=document.getElementById('refLink').textContent;try{await navigator.clipboard.writeText(s);toast('Invite link copied')}catch(e){toast('Long-press the link to copy it')}}
 function shareRef(){const s=document.getElementById('refLink').textContent;const url='https://t.me/share/url?url='+encodeURIComponent(s)+'&text='+encodeURIComponent('Join me on Nova Rewards!');if(tg?.openTelegramLink)tg.openTelegramLink(url);else window.open(url,'_blank')}
 render();
-</script>
+  
+async function loadSupabaseTasks() {
+  const { data, error } = await supabaseClient
+    .from('nova_tasks')
+    .select('id, title, description, reward, is_active')
+    .eq('is_active', true);
+
+  if (error) {
+    console.error(error);
+    toast('Ошибка загрузки заданий');
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    toast('Активных заданий пока нет');
+    return;
+  }
+
+  missions.length = 0;
+
+  data.forEach(task => {
+    missions.push({
+      id: String(task.id),
+      icon: '✦',
+      title: task.title,
+      desc: task.description || 'Выполни задание',
+      reward: Number(task.reward) || 0
+    });
+  });
+
+  render();
+}
+
+loadSupabaseTasks();
+  
+</script> 
 </body>
 </html>
